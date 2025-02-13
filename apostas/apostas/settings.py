@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*y8gp3y0tavl=!exrlzi95x=kgv*^^4fyoh*jvm$o09#j98_*2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['gremiobet.com']
+ALLOWED_HOSTS = []
 
 
 
