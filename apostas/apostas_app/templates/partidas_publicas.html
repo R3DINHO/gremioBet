@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Partidas de Aposta</title>
+</head>
+<body>
+    <h1>Partidas de Aposta</h1>
+    {% for partida in partidas %}
+        <div>
+            <h2>{{ partida.time_casa }} vs {{ partida.time_fora }}</h2>
+            <p>Data: {{ partida.data }}</p>
+            <p>Odds - Casa: {{ partida.odds_casa }} / Fora: {{ partida.odds_fora }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>

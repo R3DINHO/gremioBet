@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Casa de Apostas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+        input, select, button {
+            width: 100%;
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .match-list, .team-list {
+            margin-top: 10px;
+        }
+        .match, .team {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            border-radius: 5px;
+            background: #fff;
+        }
+        .goal-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Gerenciar Equipes</h2>
+        <input type="text" id="teamName" placeholder="Nome da Equipe">
+        <input type="color" id="teamColor" title="Cor da Equipe">
+        <select id="teamSport">
+            <option value="">Selecione o Esporte</option>
+            <option value="Futebol">Futebol</option>
+            <option value="Basquete">Basquete</option>
+            <option value="Vôlei">Vôlei</option>
+        </select>
+        <select id="teamModality">
+            <option value="">Selecione a Modalidade</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+            <option value="Misto">Misto</option>
+        </select>
+        <input type="text" id="playerName" placeholder="Nome do Jogador">
+        <button onclick="addPlayer()">Adicionar Jogador</button>
+        <ul id="playersList"></ul>
+        <button onclick="addTeam()">Adicionar Equipe</button>
+        
+        <h3>Equipes Criadas</h3>
+        <div class="team-list" id="teamList"></div>
+    </div>
+
+    <div class="container">
+        <h2>Criar Partidas</h2>
+        <select id="team1" onchange="updateScorers()">
+            <option value="">Selecione o Time 1</option>
+        </select>
+        <select id="team2" onchange="updateScorers()">
+            <option value="">Selecione o Time 2</option>
+        </select>
+        <select id="matchFilter" onchange="updateMatchList()">
+            <option value="">Filtrar por Modalidade</option>
+        </select>
+        <button onclick="addMatch()">Adicionar Partida</button>
+        
+        <h3>Partidas Disponíveis</h3>
+        <div class="match-list" id="matchList"></div>
+    </div>
+
+    <script>
+        let teams = [];
+        let matches = [];
+        let players = [];
+
+        function addPlayer() {
+            const playerName = document.getElementById('playerName').value.trim();
+            if (!playerName) return alert("Digite o nome do jogador!");
+
+            players.push({ name: playerName, goals: 0 });
+            document.getElementById('playerName').value = '';
+            updatePlayersList();
+        }
+
+        function updatePlayersList() {
+            document.getElementById('playersList').innerHTML = players.map(player => 
+                `<li>${player.name}</li>`).join('');
+        }
+
+        function addTeam() {
+            const teamName = document.getElementById('teamName').value.trim();
+            const teamColor = document.getElementById('teamColor').value;
+            const sport = document.getElementById('teamSport').value;
+            const modality = document.getElementById('teamModality').value;
+
+            if (!teamName || !sport || !modality || players.length === 0) {
+                alert('Preencha todos os campos e adicione pelo menos um jogador!');
+                return;
+            }
+
+            teams.push({ name: teamName, color: teamColor, sport, modality, players });
+            updateTeamList();
+            updateTeamSelects();
+            updateMatchFilter();
+            players = [];
+            updatePlayersList();
+        }
+
+        function updateTeamList() {
+            document.getElementById('teamList').innerHTML = teams.map(team => `
+                <div class="team">
+                    <strong style="color:${team.color}">${team.name}</strong><br>
+                    Esporte: ${team.sport} | Modalidade: ${team.modality}<br>
+                    Jogadores: ${team.players.map(p => p.name).join(', ')}
+                </div>
+            `).join('');
+        }
+
+        function updateTeamSelects() {
+            ['team1', 'team2'].forEach(id => {
+                const select = document.getElementById(id);
+                select.innerHTML = '<option value="">Selecione um time</option>' +
+                    teams.map(team => `<option value="${team.name}">${team.name}</option>`).join('');
+            });
+        }
+
+        function updateMatchFilter() {
+            const filter = document.getElementById('matchFilter');
+            filter.innerHTML = '<option value="">Filtrar por Modalidade</option>' +
+                [...new Set(teams.map(team => team.modality))].map(mod => `<option value="${mod}">${mod}</option>`).join('');
+        }
+
+        function addMatch() {
+            const team1Name = document.getElementById('team1').value;
+            const team2Name = document.getElementById('team2').value;
+
+            if (!team1Name || !team2Name || team1Name === team2Name) {
+                alert('Selecione dois times diferentes!');
+                return;
+            }
+
+            const team1 = teams.find(t => t.name === team1Name);
+            const team2 = teams.find(t => t.name === team2Name);
+            matches.push({ team1, team2 });
+            updateMatchList();
+        }
+
+        function updateMatchList() {
+            const filter = document.getElementById('matchFilter').value;
+            document.getElementById('matchList').innerHTML = matches
+                .filter(match => !filter || match.team1.modality === filter || match.team2.modality === filter)
+                .map(match => `
+                    <div class="match">
+                        <strong>${match.team1.name} vs ${match.team2.name}</strong>
+                    </div>
+                `).join('');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>GremioBet</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar-container">
+            <nav>
+                <img src="../static/img/logos/logoBranca.png" alt="logo de GremioBet">
+                <div class="login-container">
+                    <i class="fa-solid fa-user" id="user"></i>
+                    <button class="userLogin-buttons" id="loginButton">Login</button>
+                    <button class="userLogin-buttons" id="registerButton">Registrar</button>
+                </div>
+            </nav>
+            <div class="rodapeNav">
+                <button>
+                    <i class="fa-solid fa-basketball"></i>
+                    <p>Basquete</p>
+                </button>
+                <button onclick="abrirApostaContainer(this)" id="eGamesButton">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <p>eSports</p>
+                </button>
+                <button onclick="abrirApostaContainer(this)" id="futsalButton">
+                    <i class="fa-regular fa-futbol"></i>
+                    <p>Futsal</p>
+                </button>
+                <button>
+                    <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                    <p>Ping-Pong</p>
+                </button>
+                <button>
+                    <i class="fa-solid fa-volleyball"></i>
+                    <p>Volêi</p>
+                </button>
+            </div>
+        </div>
+        <main>
+            <div class="apostas-container" id="eGamesButton-Container">
+                <div class="filtros">
+                    <h2>Filtro</h2>
+                    <ul class="filtro-list">
+                        <li><button onclick="filtrar(filtro-list)" class="filtroSelecionado">Pinto</button></li>
+                        <hr class="linhaSepara">
+                        <li><button>Feminino</button></li>
+                    </ul>
+                </div>
+                <div class="partidas">
+                    <header>
+                        <h2 class="jogosH2">Jogos</h2>
+                        <div class="resultado">
+                            <h2>1</h2>
+                            <h2>x</h2>
+                            <h2>2</h2>
+                        </div>
+                        <h2>Ambas Marcam</h2>
+                        <h2>Mais/Menos</h2>
+                    </header>
+
+                    <div class="partidas-container">
+                        {% for partida in partidas %}
+                        {% load tz %}
+                        <hr class="linhaSepara">
+                        <div class="partida-card">
+                            <div class="dadosPartida">
+                                <div class="dataPartida">
+                                    <div class="dia">
+                                        <p>{{partida.data|localtime|date:"D"}}</p>
+                                        <p>{{ partida.data|localtime|date:"d/m" }}</p>
+                                    </div>
+                                    <div class="hora">
+                                        <p>{{ partida.data|localtime|time }}</p>
+                                    </div>
+                                </div>
+                                <div class="times">
+                                    <div class="time">
+
+                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_casa }};"></i>
+                                        <p>{{ partida.time_casa }}</p>
+                                    </div>
+                                    <div class="time">
+                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_fora }};"></i>
+                                        <p>{{ partida.time_fora }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="odds">
+                                <button class="odds-cards">{{ partida.odds_casa }}</button>
+                                <button class="odds-cards">{{ partida.odds_empate }}</button>
+                                <button class="odds-cards">{{ partida.odds_fora }}</button>
+                            </div>
+                            <div class="ambosMarcam">
+                                <button class="odds-cards"><span class="texto">Sim</span> {{ partida.odds_casa }}</button>
+                                <button class="odds-cards"><span class="texto">Não</span> {{ partida.odds_empate }}</button>
+                            </div>
+                            <div class="maisMenos">
+                                <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.odds_casa }}</button>
+                                <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.odds_empate }}</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="apostas-container" id="futsalButton-Container">
+                <div class="filtros">
+                    <h2>Filtro</h2>
+                    <ul class="filtro-list">
+                        <li><button onclick="filtrar(this)" class="filtroSelecionado" id="nenhum">Nenhum</button></li>
+                        <hr class="linhaSepara">
+                        <li><button onclick="filtrar(this)" id="mistoButton">Misto</button></li>
+                        <hr class="linhaSepara">
+                        <li><button onclick="filtrar(this)" id="femininoButton">Feminino</button></li>
+                    </ul>
+                </div>
+                <div class="partidas">
+                    <header>
+                        <h2 class="jogosH2">Jogos</h2>
+                        <div class="resultado">
+                            <h2>1</h2>
+                            <h2>x</h2>
+                            <h2>2</h2>
+                        </div>
+                        <h2>Ambas Marcam</h2>
+                        <h2>Mais/Menos</h2>
+                    </header>
+
+                    <div class="partidas-container" id="misto">
+                        <div class="separarSessao">Misto</div>
+                        {% for partida in partidas %}
+                        {% load tz %}
+                        {% if partida.modalidade == 'masc' %}
+                        <hr class="linhaSepara">
+                        <div class="partida-card">
+                            <div class="dadosPartida">
+                                <div class="dataPartida">
+                                    <div class="dia">
+                                        <p>{{partida.data|localtime|date:"D"}}</p>
+                                        <p>{{ partida.data|localtime|date:"d/m" }}</p>
+                                    </div>
+                                    <div class="hora">
+                                        <p>{{ partida.data|localtime|time }}</p>
+                                    </div>
+                                </div>
+                                <div class="times">
+                                    <div class="time">
+
+                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_casa }};"></i>
+                                        <p>{{ partida.time_casa }}</p>
+                                    </div>
+                                    <div class="time">
+                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_fora }};"></i>
+                                        <p>{{ partida.time_fora }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="odds">
+                                <button class="odds-cards">{{ partida.odds_casa }}</button>
+                                <button class="odds-cards">{{ partida.odds_empate }}</button>
+                                <button class="odds-cards">{{ partida.odds_fora }}</button>
+                            </div>
+                            <div class="ambosMarcam">
+                                <button class="odds-cards"><span class="texto">Sim</span> {{ partida.ambasMarcamSim }}</button>
+                                <button class="odds-cards"><span class="texto">Não</span> {{ partida.ambasMarcamNao }}</button>
+                            </div>
+                            <div class="maisMenos">
+                                <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.maisGols }}</button>
+                                <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.menosGols }}</button>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="partidas-container" id="feminino">
+                        <div class="separarSessao">Feminino</div>
+                        {% for partida in partidas %}
+                        {% load tz %}
+                        {% if partida.modalidade == 'fem' %}
+                        <hr class="linhaSepara">
+                        <div class="partida-card">
+                            <div class="dadosPartida">
+                                <div class="dataPartida">
+                                    <div class="dia">
+                                        <p>{{partida.data|localtime|date:"D"}}</p>
+                                        <p>{{ partida.data|localtime|date:"d/m" }}</p>
+                                    </div>
+                                    <div class="hora">
+                                        <p>{{ partida.data|localtime|time }}</p>
+                                    </div>
+                                </div>
+                                <div class="times">
+                                    <div class="time">
+
+                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_casa }};"></i>
+                                        <p>{{ partida.time_casa }}</p>
+                                    </div>
+                                    <div class="time">
+                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_fora }};"></i>
+                                        <p>{{ partida.time_fora }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="odds">
+                                <button class="odds-cards">{{ partida.odds_casa }}</button>
+                                <button class="odds-cards">{{ partida.odds_empate }}</button>
+                                <button class="odds-cards">{{ partida.odds_fora }}</button>
+                            </div>
+                            <div class="ambosMarcam">
+                                <button class="odds-cards"><span class="texto">Sim</span> {{ partida.odds_casa }}</button>
+                                <button class="odds-cards"><span class="texto">Não</span> {{ partida.odds_empate }}</button>
+                            </div>
+                            <div class="maisMenos">
+                                <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.odds_casa }}</button>
+                                <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.odds_empate }}</button>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+    <script src="../static/js/filtro.js"></script>
+    <script src="../static/js/abrirApostasContainer.js"></script>
+    <script src="https://kit.fontawesome.com/49ae6019cf.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

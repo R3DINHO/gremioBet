@@ -1,0 +1,3 @@
+WebSockets ou uma biblioteca como Socket.io ->
+permitir que todos os usuários vejam as novas partidas assim que elas forem adicionadas pelo admin.
+
