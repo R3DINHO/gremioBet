@@ -23,11 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-uxx245(g74jt8%m2k1-=m-an$4ujd3vpw)4^ug^^k&=qjkm%^a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 import os
 
 ALLOWED_HOSTS = ['gremiobet.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 
