@@ -1,1 +1,2 @@
-web: gunicorn gremioBet.wsgi:application
+web: gunicorn gremioBet.wsgi --log-file -
+

@@ -23,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-uxx245(g74jt8%m2k1-=m-an$4ujd3vpw)4^ug^^k&=qjkm%^a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+import os
+
+ALLOWED_HOSTS = ['.onrender.com']
+
 
 
 # Application definition
@@ -123,9 +126,9 @@ import os
 
 STATIC_URL = 'static/'  # URL para acessar arquivos estáticos
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]  # Arquivos globais do projeto
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Para coleta de arquivos em produção
 
 
 # Default primary key field type

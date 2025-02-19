@@ -1,0 +1,343 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    user-select: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+body{
+    background-color: #e8e8e8;
+}
+
+/* navbars */
+.navbar-container nav{
+    background-color: #000;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* login container */
+.navbar-container nav .login-container{
+    display: flex;
+    gap: 10px;
+}
+
+.userLogin-buttons{
+    width: 150px;
+    border-radius: 25px;
+    border: 5px solid #ff8c23;
+    background-color: #000;
+    color: #ff8c23;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+#loginButton{
+    background-color: #ff8c23;
+    color: #fff;
+}
+
+#loginButton:hover{
+    background-color: #e46e00;
+    border: 5px solid #e46e00;
+}
+
+#registerButton:hover{
+    border: 5px solid #e46e00;
+    color: #e46e00;
+}
+
+.navbar-container nav #user{
+    color: #fff;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    font-size: 30px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-container .rodapeNav{
+    background-color: #ff8c23;
+    height: 4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar-container .rodapeNav button{
+    background-color: #00000000;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 100%;
+    flex: 1;
+    transition: 0.3s ease;
+}
+
+.navbar-container .rodapeNav button:hover{
+    background-color: #e46e00;
+}
+
+.navbar-container .rodapeNav button i{
+    font-size: 40px;
+}
+
+.navbar-container .rodapeNav button p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* main */
+main{
+    background-color: #e8e8e8;
+    height: 100%;
+}
+
+/* container de apostas */
+
+.apostas-container{
+    background-color: #afafaf;
+    width: 85%;
+    height: 73vh;
+    margin: 10px auto;
+    border-radius: 5px;
+    display: none;
+}
+
+#futsalButton-Container{
+    display: flex;
+}
+
+
+
+.filtros{
+    width: 20%;
+    border-right: 1px solid #3d3d3d;
+}
+
+.partidas{
+    width: 80%;
+}
+
+/* filtro div */
+
+.filtros h2{
+    font-size: 35px;
+    padding: 1rem 2rem 0;
+}
+
+.filtro-list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    height: 200px;
+    
+}
+
+.filtro-list li{
+    list-style: none;
+    height: 50%;
+}
+
+.filtros button{
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    height: 100%;
+    width: 100%;
+    text-align: left;
+    padding: 0 3rem;
+    transition: 0.3s ease;
+    letter-spacing: 1px;
+
+}
+
+.filtros button:hover{
+    background-color: #8f8f8f;
+}
+
+.filtroSelecionado{
+    color: #e46e00;
+    text-shadow: 0 0 2px #e46e00,
+        0 0 2px #000;
+    ;
+    font-weight: bold;
+    background-color: #3d3d3d!important;
+}
+
+.linhaSepara{
+    border: 1px solid #929292;
+    width: 100%;
+    margin: auto;
+}
+
+/* PARTIDAS container */
+
+
+
+.partidas header, header .resultado{
+    display: flex;
+}
+
+.partidas header{
+    padding: 1rem 2rem 0;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+header .jogosH2{
+    flex: 0.5;
+}
+
+header .resultado{
+    gap: 30px;
+}
+
+.partidas h2{
+    font-size: 23px;
+
+}
+
+/* separar sessão */
+
+.separarSessao{
+    background-color: #929292;
+    padding: 0.5rem 2rem;
+    font-weight: bold;
+}
+
+/* card partidas */
+
+.partida-card{
+    display: flex;
+    justify-content: start;
+    padding: 0.6rem 1rem 0.6rem 2rem;
+    height: 70px;
+    justify-content: space-between;
+}
+
+
+/* informações da partida */
+.dadosPartida{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex: 0.51;
+    min-width: 193px;
+    max-width: 193px;
+}
+
+.dataPartida{
+    text-align: center;
+    width: 80px;
+}
+
+.dia{
+    display: flex;
+    gap: 8px;
+}
+
+
+/* times */
+
+.times{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.time{
+    display: flex;
+    gap: 5px;
+}
+
+.time p{
+    text-align: left;
+    font-weight: bold;
+
+}
+
+/* ajustar tamanho ambosmarcam */
+
+.ambosMarcam{
+    margin-right: 0.7rem;
+}
+
+/* ... mais/menos */
+
+.maisMenos{
+    margin-right: 4px;
+}
+
+/* odds */
+.odds, .ambosMarcam, .maisMenos{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.odds-cards{
+    color: #207c20;
+    font-weight: bold;
+    background-color: #e8e8e8;
+    border: none;
+    padding: 0.5rem 0.75rem;
+    width: 50px;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.odds-cards:hover{
+    background-color: #ffd0a5;
+}
+
+.texto{
+    color: #000;
+}
+
+.ambosMarcam .odds-cards, .maisMenos .odds-cards{
+    width: 80px;
+}
+
+.odds .odds-cards{
+    margin-left: 0.15rem;
+}
+
+
+
+
+@media screen and (max-width: 1440px) {
+    
+    /* ajustando tamanho da imagem da nav */
+    .navbar-container nav img{
+        width: 400px;
+    }
+
+    /* tamanho das opções no rodapé */
+
+
+    .navbar-container .rodapeNav button i{
+        font-size: 30px;
+    }
+
+    .navbar-container .rodapeNav button p{
+        font-size: 17px;
+    }
+}
