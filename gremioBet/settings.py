@@ -155,27 +155,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
 
 if 'RENDER' in os.environ:  # Quando estiver rodando no Render
-    ALLOWED_HOSTS = ['seu-dominio-do-render.onrender.com']
+    ALLOWED_HOSTS = ['gremio.bet.onrender.com']
     DEBUG = False
 else:
     ALLOWED_HOSTS = []
     DEBUG = True
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
+
 
