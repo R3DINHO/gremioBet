@@ -228,7 +228,7 @@ header .resultado{
     display: flex;
     justify-content: start;
     padding: 0.6rem 1rem 0.6rem 2rem;
-    height: 70px;
+    height: 100px;
     justify-content: space-between;
 }
 
@@ -260,7 +260,7 @@ header .resultado{
     display: flex;
     flex-direction: column;
     height: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .time{

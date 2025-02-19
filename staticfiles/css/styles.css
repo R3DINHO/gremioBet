@@ -228,8 +228,8 @@ header .resultado{
     display: flex;
     justify-content: start;
     padding: 0.6rem 1rem 0.6rem 2rem;
-    height: 70px;
-    justify-content: space-between;
+    height: 100px;
+    justify-content: space-around;
 }
 
 
