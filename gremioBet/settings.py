@@ -155,7 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
 
 if 'RENDER' in os.environ:  # Quando estiver rodando no Render
-    ALLOWED_HOSTS = ['gremio.bet.onrender.com']
+    ALLOWED_HOSTS = ['gremiobet.onrender.com']
     DEBUG = False
 else:
     ALLOWED_HOSTS = []
