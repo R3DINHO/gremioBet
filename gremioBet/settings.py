@@ -139,9 +139,12 @@ USE_TZ = True
 
 import os
 
-STATIC_URL = 'static/'  # URL para acessar arquivos estáticos
+STATIC_URL = '/static/'
 
+# Se estiver em produção, use STATIC_ROOT para coletar arquivos estáticos.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Para desenvolvimento, se necessário:
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 
