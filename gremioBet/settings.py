@@ -179,9 +179,3 @@ LOGGING = {
     },
 }
 
-
-SECURE_SSL_REDIRECT = True
-
-SECURE_HSTS_SECONDS = 3600  # Tempo que o navegador deve forçar HTTPS
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
