@@ -160,3 +160,28 @@ if 'RENDER' in os.environ:  # Quando estiver rodando no Render
 else:
     ALLOWED_HOSTS = []
     DEBUG = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
+SECURE_SSL_REDIRECT = True
+
+SECURE_HSTS_SECONDS = 3600  # Tempo que o navegador deve forçar HTTPS
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
