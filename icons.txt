@@ -1,0 +1,14 @@
+basquete
+<i class="fa-solid fa-basketball"></i>
+
+futsal
+<i class="fa-regular fa-futbol"></i>
+
+volei
+<i class="fa-solid fa-volleyball"></i>
+
+eSports
+<i class="fa-solid fa-gamepad"></i>
+
+ping pong
+<i class="fa-solid fa-table-tennis-paddle-ball"></i>
