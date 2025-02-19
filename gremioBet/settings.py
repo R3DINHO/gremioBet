@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -139,13 +140,18 @@ USE_TZ = True
 
 import os
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
-# Se estiver em produção, use STATIC_ROOT para coletar arquivos estáticos.
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Diretório onde os arquivos estáticos serão coletados em produção
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-# Para desenvolvimento, se necessário:
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# Diretórios onde o Django procura arquivos estáticos
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+DISABLE_COLLECTSTATIC = 1
+
 
 
 
