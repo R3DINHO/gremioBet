@@ -214,6 +214,24 @@ header .resultado{
 
 }
 
+/* corpo  de partidas */
+
+.partidas-body{
+    height: 86%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.partidas-body::-webkit-scrollbar{
+    background: #00000000;
+}
+
+.partidas-body::-webkit-scrollbar-thumb{
+    background: #929292;
+    border-radius: 5px;
+}
+
+
 /* separar sessão */
 
 .separarSessao{
@@ -271,7 +289,15 @@ header .resultado{
 .time p{
     text-align: left;
     font-weight: bold;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    
+}
 
+.time i{
+    display: flex;
+    align-items: center;
 }
 
 /* ajustar tamanho ambosmarcam */
