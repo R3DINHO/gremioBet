@@ -244,10 +244,9 @@ header .resultado{
 
 .partida-card{
     display: flex;
-    justify-content: start;
-    padding: 0.6rem 1rem 0.6rem 2rem;
+    padding: 0.6rem 0 0.6rem 2rem;
     height: 100px;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 
@@ -256,9 +255,9 @@ header .resultado{
     display: flex;
     gap: 30px;
     align-items: center;
-    flex: 0.51;
+    flex: 0.543;
+    justify-content: start;
     min-width: 193px;
-    max-width: 193px;
 }
 
 .dataPartida{
@@ -304,7 +303,7 @@ header .resultado{
 /* ajustar tamanho ambosmarcam */
 
 .ambosMarcam{
-    margin-right: 0.7rem;
+    margin-right: 0.8rem;
 }
 
 /* ... mais/menos */
