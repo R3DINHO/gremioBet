@@ -1,9 +1,7 @@
+# apostas/views.py
 from django.shortcuts import render
-from django.utils.timezone import now
-from .models import Partida
+from .models import Partida  # Certifique-se de que o modelo está importado
 
 def index(request):
-    # Obtém todas as partidas futuras ordenadas pela data mais próxima
-    partidas = Partida.objects.filter(data__gte=now()).order_by('data')
-
+    partidas = Partida.objects.order_by('data') # Busca todas as partidas no banco
     return render(request, "apostas/index.html", {"partidas": partidas})
