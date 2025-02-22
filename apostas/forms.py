@@ -9,7 +9,7 @@ from .widgets import ImageRadioSelect
 def get_profile_images():
     profile_img_path = os.path.join(settings.BASE_DIR, 'apostas', 'static', 'img', 'fotosPerfil')
     if os.path.exists(profile_img_path):  # Verifica se o diretório existe
-        images = [f for f in os.listdir(profile_img_path) if f.endswith(('.png', '.jpg', '.jpeg', '.gif'))]
+        images = [f for f in os.listdir(profile_img_path) if f.endswith(('.png', '.jpg', '.jpeg', '.gif', 'webp'))]
         return [(img, img) for img in images]
     return []  # Retorna uma lista vazia caso o diretório não exista
 
