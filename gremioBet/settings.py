@@ -74,9 +74,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates',  # Adicione isso se você usar uma pasta global para templates
+            BASE_DIR / 'templates',  # Diretório global de templates (opcional)
         ],
-        'APP_DIRS': True,  # Certifique-se de que 'APP_DIRS' esteja como True
+        'APP_DIRS': True,  # Procura templates dentro dos apps
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -98,9 +98,16 @@ WSGI_APPLICATION = 'gremioBet.wsgi.application'
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(default="postgresql://partidasgremiobet_user:kUbHupgXuRdQfTE3PtNgzGQlGGuZFxhE@dpg-cur3kqaj1k6c73cvqe70-a.ohio-postgres.render.com/partidasgremiobet")
+    'default': dj_database_url.config(
+        default="postgresql://gremiobet_avyw_user:WNQgWyI6CwRJv9qkv1CeQLXEuQKvNOoz@dpg-cusf89ggph6c739d5b4g-a.ohio-postgres.render.com/gremiobet_avyw",
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
+# settings.py
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Password validation
@@ -121,6 +128,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# settings.py
+AUTH_USER_MODEL = 'apostas.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -147,6 +156,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Diretórios onde o Django procura arquivos estáticos
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
 DISABLE_COLLECTSTATIC = 1

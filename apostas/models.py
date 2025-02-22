@@ -18,3 +18,20 @@ class Partida(models.Model):
 
     def __str__(self):
         return f'{self.time_casa} vs {self.time_fora} - {self.data}'
+
+# models.py
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class CustomUser(AbstractUser):
+    profile_image = models.CharField(max_length=255, default="img/fotosPerfil/default.png")
+    gremio_coins = models.IntegerField(default=100)
+
+    # Função para retornar a URL da imagem de perfil
+    def get_imagem_perfil_url(self):
+        
+        return f"/static/{self.profile_image}" 
+
+
+    gremio_coins = models.IntegerField(default=100)

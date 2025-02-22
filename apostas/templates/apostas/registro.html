@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>GremioBet</title>
+    <style>
+        .rodapeNav button{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar-container">
+            <nav>
+                <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
+            </nav>
+            <div class="rodapeNav">
+                <button>
+                    <i class="fa-solid fa-basketball"></i>
+                    <p>Basquete</p>
+                </button>
+                <button onclick="abrirApostaContainer(this)" id="eGamesButton">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <p>eSports</p>
+                </button>
+                <button onclick="abrirApostaContainer(this)" id="futsalButton">
+                    <i class="fa-regular fa-futbol"></i>
+                    <p>Futsal</p>
+                </button>
+                <button>
+                    <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                    <p>Ping-Pong</p>
+                </button>
+                <button>
+                    <i class="fa-solid fa-volleyball"></i>
+                    <p>Volêi</p>
+                </button>
+            </div>
+        </div>
+        <main>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label>Usuário:</label> {{ form.username }} <br>
+                <label>Email:</label> {{ form.email }} <br>
+                <label>Senha:</label> {{ form.password1 }} <br>
+                <label>Confirmação de Senha:</label> {{ form.password2 }} <br>
+                <p><label for="id_profile_image">Escolha uma imagem de perfil:</label></p>
+                <div>
+                    {% for value, label in form.profile_image.field.choices %}
+                        <label>
+                            <input type="radio" name="profile_image" value="{{ value }}" id="id_profile_image_{{ value }}">
+                            <img src="{% static 'img/fotosPerfil/' %}{{ value }}" width="50" height="50" />
+                        </label>
+                    {% endfor %}
+                </div>
+                <button type="submit">Registrar</button>
+            </form>
+        </main>
+    </div>
+    <script src="{% static 'js/filtro.js' %}"></script>
+    <script src="../../static/js/abrirApostasContainer.js"></script>
+    <script src="https://kit.fontawesome.com/49ae6019cf.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
 
 
 <head>
@@ -22,10 +22,17 @@
         <div class="navbar-container">
             <nav>
                 <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
+                
+                
                 <div class="login-container">
-                    <i class="fa-solid fa-user" id="user"></i>
-                    <button class="userLogin-buttons" id="loginButton">Login</button>
-                    <button class="userLogin-buttons" id="registerButton">Registrar</button>
+                    {% if user.is_authenticated %}
+                        <p id="gremioCoins"><span style="font-weight: bold;">₲</span>{{ user.gremio_coins }}</p>
+                        <img src="{% static 'img/fotosPerfil/'|add:user.profile_image %}" id="perfilImage" alt="Imagem de Perfil">
+                        <a class="userLogin-buttons" href="{% url 'logout' %}?next={% url 'index' %}">Logout</a>
+                    {% else %}
+                        <a class="userLogin-buttons" id="loginButton" href="{% url 'login' %}">Login</a>
+                        <a class="userLogin-buttons" id="registerButton" href="{% url 'registro' %}">Registrar</a>
+                    {% endif %}
                 </div>
             </nav>
             <div class="rodapeNav">
@@ -106,12 +113,16 @@
                                 <button class="odds-cards">{{ partida.odds_fora }}</button>
                             </div>
                             <div class="ambosMarcam">
-                                <button class="odds-cards"><span class="texto">Sim</span> {{ partida.odds_casa }}</button>
-                                <button class="odds-cards"><span class="texto">Não</span> {{ partida.odds_empate }}</button>
+                                <button class="odds-cards"><span class="texto">Sim</span> {{ partida.odds_casa
+                                    }}</button>
+                                <button class="odds-cards"><span class="texto">Não</span> {{ partida.odds_empate
+                                    }}</button>
                             </div>
                             <div class="maisMenos">
-                                <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.odds_casa }}</button>
-                                <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.odds_empate }}</button>
+                                <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.odds_casa
+                                    }}</button>
+                                <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.odds_empate
+                                    }}</button>
                             </div>
                         </div>
                         {% endfor %}
@@ -144,103 +155,103 @@
                     </header>
                     <div class="partidas-body">
                         <div class="partidas-container" id="misto">
-                        <div class="separarSessao">Misto</div>
-                        {% for partida in partidas %}
-                        {% load tz %}
-                        {% if partida.modalidade == 'masc' %}
-                        <hr class="linhaSepara">
-                        <div class="partida-card">
-                            <div class="dadosPartida">
-                                <div class="dataPartida">
-                                    <div class="dia">
-                                        <p>{{partida.data|localtime|date:"D"}}</p>
-                                        <p>{{ partida.data|localtime|date:"d/m" }}</p>
+                            <div class="separarSessao">Misto</div>
+                            {% for partida in partidas %}
+                            {% load tz %}
+                            {% if partida.modalidade == 'masc' %}
+                            <hr class="linhaSepara">
+                            <div class="partida-card">
+                                <div class="dadosPartida">
+                                    <div class="dataPartida">
+                                        <div class="dia">
+                                            <p>{{partida.data|localtime|date:"D"}}</p>
+                                            <p>{{ partida.data|localtime|date:"d/m" }}</p>
+                                        </div>
+                                        <div class="hora">
+                                            <p>{{ partida.data|localtime|time }}</p>
+                                        </div>
                                     </div>
-                                    <div class="hora">
-                                        <p>{{ partida.data|localtime|time }}</p>
-                                    </div>
-                                </div>
-                                <div class="times">
-                                    <div class="time">
+                                    <div class="times">
+                                        <div class="time">
 
-                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_casa }};"></i>
-                                        <p>{{ partida.time_casa }}</p>
-                                    </div>
-                                    <div class="time">
-                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_fora }};"></i>
-                                        <p>{{ partida.time_fora }}</p>
+                                            <i class="fa-solid fa-shirt" style="color: {{ partida.cor_casa }};"></i>
+                                            <p>{{ partida.time_casa }}</p>
+                                        </div>
+                                        <div class="time">
+                                            <i class="fa-solid fa-shirt" style="color: {{ partida.cor_fora }};"></i>
+                                            <p>{{ partida.time_fora }}</p>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="odds">
+                                    <button class="odds-cards">{{ partida.odds_casa }}</button>
+                                    <button class="odds-cards">{{ partida.odds_empate }}</button>
+                                    <button class="odds-cards">{{ partida.odds_fora }}</button>
+                                </div>
+                                <div class="ambosMarcam">
+                                    <button class="odds-cards"><span class="texto">Sim</span> {{ partida.ambasMarcamSim}}</button>
+                                    <button class="odds-cards"><span class="texto">Não</span> {{ partida.ambasMarcamNao}}</button>
+                                </div>
+                                <div class="maisMenos">
+                                    <button class="odds-cards"><span class="texto">+3.5</span>{{ partida.maisGols}}</button>
+                                    <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.menosGols}}</button>
+                                </div>
                             </div>
-                            <div class="odds">
-                                <button class="odds-cards">{{ partida.odds_casa }}</button>
-                                <button class="odds-cards">{{ partida.odds_empate }}</button>
-                                <button class="odds-cards">{{ partida.odds_fora }}</button>
-                            </div>
-                            <div class="ambosMarcam">
-                                <button class="odds-cards"><span class="texto">Sim</span> {{ partida.ambasMarcamSim }}</button>
-                                <button class="odds-cards"><span class="texto">Não</span> {{ partida.ambasMarcamNao }}</button>
-                            </div>
-                            <div class="maisMenos">
-                                <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.maisGols }}</button>
-                                <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.menosGols }}</button>
-                            </div>
+                            {% endif %}
+                            {% endfor %}
                         </div>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div class="partidas-container" id="feminino">
-                        <div class="separarSessao">Feminino</div>
-                        {% for partida in partidas %}
-                        {% load tz %}
-                        {% if partida.modalidade == 'fem' %}
-                        <hr class="linhaSepara">
-                        <div class="partida-card">
-                            <div class="dadosPartida">
-                                <div class="dataPartida">
-                                    <div class="dia">
-                                        <p>{{partida.data|localtime|date:"D"}}</p>
-                                        <p>{{ partida.data|localtime|date:"d/m" }}</p>
+                        <div class="partidas-container" id="feminino">
+                            <div class="separarSessao">Feminino</div>
+                            {% for partida in partidas %}
+                            {% load tz %}
+                            {% if partida.modalidade == 'fem' %}
+                            <hr class="linhaSepara">
+                            <div class="partida-card">
+                                <div class="dadosPartida">
+                                    <div class="dataPartida">
+                                        <div class="dia">
+                                            <p>{{partida.data|localtime|date:"D"}}</p>
+                                            <p>{{ partida.data|localtime|date:"d/m" }}</p>
+                                        </div>
+                                        <div class="hora">
+                                            <p>{{ partida.data|localtime|time }}</p>
+                                        </div>
                                     </div>
-                                    <div class="hora">
-                                        <p>{{ partida.data|localtime|time }}</p>
-                                    </div>
-                                </div>
-                                <div class="times">
-                                    <div class="time">
+                                    <div class="times">
+                                        <div class="time">
 
-                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_casa }};"></i>
-                                        <p>{{ partida.time_casa }}</p>
-                                    </div>
-                                    <div class="time">
-                                        <i class="fa-solid fa-shirt" style="color: {{ partida.cor_fora }};"></i>
-                                        <p>{{ partida.time_fora }}</p>
+                                            <i class="fa-solid fa-shirt" style="color: {{ partida.cor_casa }};"></i>
+                                            <p>{{ partida.time_casa }}</p>
+                                        </div>
+                                        <div class="time">
+                                            <i class="fa-solid fa-shirt" style="color: {{ partida.cor_fora }};"></i>
+                                            <p>{{ partida.time_fora }}</p>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="odds">
+                                    <button class="odds-cards">{{ partida.odds_casa }}</button>
+                                    <button class="odds-cards">{{ partida.odds_empate }}</button>
+                                    <button class="odds-cards">{{ partida.odds_fora }}</button>
+                                </div>
+                                <div class="ambosMarcam">
+                                    <button class="odds-cards"><span class="texto">Sim</span> {{ partida.odds_casa}}</button>
+                                    <button class="odds-cards"><span class="texto">Não</span> {{ partida.odds_empate}}</button>
+                                </div>
+                                <div class="maisMenos">
+                                    <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.odds_casa}}</button>
+                                    <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.odds_empate}}</button>
+                                </div>
                             </div>
-                            <div class="odds">
-                                <button class="odds-cards">{{ partida.odds_casa }}</button>
-                                <button class="odds-cards">{{ partida.odds_empate }}</button>
-                                <button class="odds-cards">{{ partida.odds_fora }}</button>
-                            </div>
-                            <div class="ambosMarcam">
-                                <button class="odds-cards"><span class="texto">Sim</span> {{ partida.odds_casa }}</button>
-                                <button class="odds-cards"><span class="texto">Não</span> {{ partida.odds_empate }}</button>
-                            </div>
-                            <div class="maisMenos">
-                                <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.odds_casa }}</button>
-                                <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.odds_empate }}</button>
-                            </div>
+                            {% endif %}
+                            {% endfor %}
                         </div>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
 
-                    
+
+
+                    </div>
 
                 </div>
-
-            </div>
 
         </main>
     </div>
