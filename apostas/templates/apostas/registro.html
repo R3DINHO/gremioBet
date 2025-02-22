@@ -24,7 +24,9 @@
     <div class="container">
         <div class="navbar-container">
             <nav>
-                <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
+                </a>           
             </nav>
             <div class="rodapeNav">
 
@@ -65,7 +67,7 @@
         </main>
     </div>
     <script src="{% static 'js/filtro.js' %}"></script>
-    <script src="{% static 'js/abrirApostasContainer.js'}"></script>
+    <script src="../../static/js/abrirApostasContainer.js"></script>
     <script src="{% static 'js/mostrarSenha.js '%}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="https://kit.fontawesome.com/49ae6019cf.js" crossorigin="anonymous"></script>

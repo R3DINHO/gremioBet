@@ -22,7 +22,9 @@
     <div class="container">
         <div class="navbar-container">
             <nav>
-                <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
+                </a>    
                 <div class="login-container">
                     <p id="gremioCoins">₲100,00</p>
                     <i class="fa-solid fa-user" id="user"></i>
