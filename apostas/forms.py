@@ -31,4 +31,23 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ['username', 'email', 'password1', 'password2']
 
+def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
+        # Personalizando mensagens de erro
+        self.fields['username'].error_messages = {
+            'unique': 'Este nome de usuário já está em uso.',
+            'max_lenght' : '',
+        }
+
+        self.fields['password1'].error_messages = {
+            'required': 'A senha é obrigatória.',
+            'min_length': 'A senha deve ter pelo menos 8 caracteres.',
+            'password_too_common': 'Essa senha é muito comum.',
+            'password_entirely_numeric': 'A senha não pode ser apenas números.',
+        }
+
+        self.fields['password2'].error_messages = {
+            'required': 'Você precisa confirmar a senha.',
+            'password_mismatch': 'As senhas não coincidem.',
+        }
