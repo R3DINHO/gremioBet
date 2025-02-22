@@ -28,3 +28,8 @@ class CustomUserAdmin(UserAdmin):
 
 # Registrar o modelo CustomUser com a classe CustomUserAdmin
 admin.site.register(CustomUser, CustomUserAdmin)
+
+from django.contrib import admin
+from .models import Partida
+
+admin.site.register(Partida)
