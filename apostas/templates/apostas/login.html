@@ -26,49 +26,30 @@
                     <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
                 </a>    
                 <div class="login-container">
-                    <p id="gremioCoins">₲100,00</p>
                     <i class="fa-solid fa-user" id="user"></i>
-                    <button class="userLogin-buttons" id="loginButton">Login</button>
-                    <button class="userLogin-buttons" id="registerButton">Registrar</button>
+                    <a class="userLogin-buttons" id="loginButton" href="{% url 'login' %}">Login</a>
+                    <a class="userLogin-buttons" id="registerButton" href="{% url 'registro' %}">Registrar</a>
                 </div>
             </nav>
             <div class="rodapeNav">
-                <button>
-                    <i class="fa-solid fa-basketball"></i>
-                    <p>Basquete</p>
-                </button>
-                <button onclick="abrirApostaContainer(this)" id="eGamesButton">
-                    <i class="fa-solid fa-gamepad"></i>
-                    <p>eSports</p>
-                </button>
-                <button onclick="abrirApostaContainer(this)" id="futsalButton">
-                    <i class="fa-regular fa-futbol"></i>
-                    <p>Futsal</p>
-                </button>
-                <button>
-                    <i class="fa-solid fa-table-tennis-paddle-ball"></i>
-                    <p>Ping-Pong</p>
-                </button>
-                <button>
-                    <i class="fa-solid fa-volleyball"></i>
-                    <p>Volêi</p>
-                </button>
             </div>
         </div>
         <main>
             <!-- login.html -->
+            <div class="registro-container">
 
-            {% block content %}
-            <h2>Login</h2>
-            <form method="post">
-                {% csrf_token %}
-                <label for="username">Usuário:</label>
-                <input type="text" name="username" required>
-                <label for="password">Senha:</label>
-                <input type="password" name="password" required>
-                <button type="submit">Login</button>
-            </form>
-            {% endblock %}                   
+                {% block content %}
+                <h2>Login</h2>
+                <form method="post" id="registro-form">
+                    {% csrf_token %}
+                    <label for="username">Usuário</label>
+                    <input type="text" name="username" required>
+                    <label for="password">Senha</label>
+                    <input type="password" name="password" required>
+                    <button type="submit" id="registrar-Button">Login</button>
+                </form>
+                {% endblock %}                   
+            </div>
         </main>
     </div>
     <script src="{% static 'js/filtro.js' %}"></script>

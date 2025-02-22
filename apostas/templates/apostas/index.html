@@ -27,9 +27,27 @@
                 <div class="login-container">
                     {% if user.is_authenticated %}
                         <p id="gremioCoins"><span style="font-weight: bold;">₲</span>{{ user.gremio_coins }}</p>
-                        <img src="{{ user.get_imagem_perfil_url }}" id="perfilImage" alt="Imagem de Perfil">
-                        <a class="userLogin-buttons" href="{% url 'logout' %}?next={% url 'index' %}">Logout</a>
-                    {% else %}
+                        <div class="perfilImage-container">
+                            <img src="{{ user.get_imagem_perfil_url }}" onclick="menuUsuario()" id="perfilImage" alt="Imagem de Perfil">
+                            <div id="menuUsuarioAbsolute" class="invisivel">
+                                <div class="menuUsuario">
+                                    <ul>
+                                        <div class="infoUser">
+                                            <li><a href="" class="alaranja">{{user.username}}</a></li>
+                                            <li><a href="" class="alaranja naoBold">{{user.email}}</a></li>
+                                        </div>
+                                        <li><a href="">Editar Perfil <i class="fa-solid fa-pen-to-square"></i></a></li>
+                                        <li><a href="">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                    </ul>
+                                    <div class="triangulo">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="userLogin-buttons" href="{% url 'logout' %}?next={% url 'index' %}">Sair</a>
+                        {% else %}
+                        <i class="fa-solid fa-user" id="user"></i>
                         <a class="userLogin-buttons" id="loginButton" href="{% url 'login' %}">Login</a>
                         <a class="userLogin-buttons" id="registerButton" href="{% url 'registro' %}">Registrar</a>
                     {% endif %}
@@ -256,6 +274,7 @@
         </main>
     </div>
     <script src="{% static 'js/filtro.js' %}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
     <script src="../../static/js/abrirApostasContainer.js"></script>
     <script src="https://kit.fontawesome.com/49ae6019cf.js" crossorigin="anonymous"></script>
 </body>

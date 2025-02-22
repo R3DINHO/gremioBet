@@ -123,6 +123,63 @@ body{
     font-weight: bold;
 }
 
+/* menu usuário */
+
+.perfilImage-container{
+    position: relative;
+}
+
+#menuUsuarioAbsolute{
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.invisivel{
+    display: none;
+}
+
+.visivel{
+    display: block;
+}
+
+.triangulo{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    background-color: #3d3d3d;
+    transform: rotate(45deg) translate(-50%, 0);
+    left: 48.5%;
+    top: 0;
+}
+
+.menuUsuario{
+    position: relative;
+    background-color: #3d3d3d;
+    padding: 1.5rem;
+}
+
+.menuUsuario ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menuUsuario li a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.alaranja{
+    color: #e46e00!important;
+}
+
+.naoBold{
+    font-weight: normal!important;
+}
 
 /* main */
 main{
