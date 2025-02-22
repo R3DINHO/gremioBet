@@ -27,7 +27,7 @@
                 <div class="login-container">
                     {% if user.is_authenticated %}
                         <p id="gremioCoins"><span style="font-weight: bold;">₲</span>{{ user.gremio_coins }}</p>
-                        <img src="{% static 'img/fotosPerfil/'|add:user.profile_image %}" id="perfilImage" alt="Imagem de Perfil">
+                        <img src="{{ user.get_imagem_perfil_url }}" id="perfilImage" alt="Imagem de Perfil">
                         <a class="userLogin-buttons" href="{% url 'logout' %}?next={% url 'index' %}">Logout</a>
                     {% else %}
                         <a class="userLogin-buttons" id="loginButton" href="{% url 'login' %}">Login</a>

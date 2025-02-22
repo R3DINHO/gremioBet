@@ -25,13 +25,14 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    profile_image = models.CharField(max_length=255, default="img/fotosPerfil/default.png")
+    profile_image = models.CharField(max_length=255, default="default.png")
     gremio_coins = models.IntegerField(default=100)
 
-    # Função para retornar a URL da imagem de perfil
     def get_imagem_perfil_url(self):
-        
-        return f"/static/{self.profile_image}" 
+        if self.profile_image.startswith("img/fotosPerfil/"):
+            return f"/static/{self.profile_image}"
+        return f"/static/img/fotosPerfil/{self.profile_image}"
+
 
 
     gremio_coins = models.IntegerField(default=100)

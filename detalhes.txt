@@ -6,14 +6,3 @@ cor da linha de separação: #929292
 cor filtro selecionado: #3d3d3d
 
 
-<!-- <p id="gremioCoins">₲{{ user.gremio_coins }}</p>
-                    <img src="{{ user.imagem_perfil.url }}" alt="Imagem de Perfil">
-                    <a href="{% url 'logout' %}">Logout</a>
-                    <a href="{% url 'login' %}">Login</a>
-                    <a href="{% url 'registro' %}">Registrar</a> -->
-                    <p id="gremioCoins">₲{{ user.gremio_coins }}</p>
-                    <img src="{{ user.imagem_perfil.url }}" alt="">
-                    <button class="userLogin-buttons" id="loginButton">Login</button>
-                    <button class="userLogin-buttons" id="registerButton">Registrar</button>
-
-                                        <!-- <a class="userLogin-buttons" href="{% url 'logout' %}">Logout</a> -->
