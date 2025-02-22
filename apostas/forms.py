@@ -20,6 +20,13 @@ class CustomUserCreationForm(UserCreationForm):
         widget=ImageRadioSelect  # Certifique-se de que este widget está correto
     )
 
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'placeholder': 'seuemail@gmail.com'})
+    )
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Ex: NeyLindo'})
+    )
+
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'password1', 'password2']

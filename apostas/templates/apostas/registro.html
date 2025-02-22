@@ -16,9 +16,7 @@
         rel="stylesheet">
     <title>GremioBet</title>
     <style>
-        .rodapeNav button{
-            display: none;
-        }
+
     </style>
 </head>
 
@@ -29,51 +27,47 @@
                 <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
             </nav>
             <div class="rodapeNav">
-                <button>
-                    <i class="fa-solid fa-basketball"></i>
-                    <p>Basquete</p>
-                </button>
-                <button onclick="abrirApostaContainer(this)" id="eGamesButton">
-                    <i class="fa-solid fa-gamepad"></i>
-                    <p>eSports</p>
-                </button>
-                <button onclick="abrirApostaContainer(this)" id="futsalButton">
-                    <i class="fa-regular fa-futbol"></i>
-                    <p>Futsal</p>
-                </button>
-                <button>
-                    <i class="fa-solid fa-table-tennis-paddle-ball"></i>
-                    <p>Ping-Pong</p>
-                </button>
-                <button>
-                    <i class="fa-solid fa-volleyball"></i>
-                    <p>Volêi</p>
-                </button>
+
             </div>
         </div>
         <main>
-
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <label>Usuário:</label> {{ form.username }} <br>
-                <label>Email:</label> {{ form.email }} <br>
-                <label>Senha:</label> {{ form.password1 }} <br>
-                <label>Confirmação de Senha:</label> {{ form.password2 }} <br>
-                <p><label for="id_profile_image">Escolha uma imagem de perfil:</label></p>
-                <div>
-                    {% for value, label in form.profile_image.field.choices %}
-                        <label>
-                            <input type="radio" name="profile_image" value="{{ value }}" id="id_profile_image_{{ value }}">
-                            <img src="{% static 'img/fotosPerfil/' %}{{ value }}" width="50" height="50" />
+            <div class="registro-container">
+                <h2>Registre-se</h2>
+                <form method="POST" enctype="multipart/form-data" id="registro-form">
+                    {% csrf_token %}
+                    <label>Usuário</label> {{ form.username }}
+                    <label>Email</label> {{ form.email}}
+                    <label>Senha</label>
+                    <div class="password-container">
+                        {{ form.password1 }}
+                        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword(this)"></i>
+                    </div>
+                    <label>Confirme a Senha</label>
+                    <div class="password-container">
+                        {{ form.password2 }}
+                        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword(this)"></i>
+                    </div>
+                    <p id="escolhaImagem-text"><label for="id_profile_image">Escolha uma imagem de perfil:</label></p>
+                    <div>
+                        {% for value, label in form.profile_image.field.choices %}
+                        <label for="id_profile_image_{{ value }}">
+                            <input type="radio" name="profile_image" value="{{ value }}"
+                                id="id_profile_image_{{ value }}" class="hidden-radio">
+                                <div class="image-container">
+                                    <img src="{% static 'img/fotosPerfil/' %}{{ value }}" width="50" height="50" />
+                                </div>
                         </label>
-                    {% endfor %}
-                </div>
-                <button type="submit">Registrar</button>
-            </form>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" id="registrar-Button">Criar conta</button>
+                </form>
+            </div>
         </main>
     </div>
     <script src="{% static 'js/filtro.js' %}"></script>
-    <script src="../../static/js/abrirApostasContainer.js"></script>
+    <script src="{% static 'js/abrirApostasContainer.js'}"></script>
+    <script src="{% static 'js/mostrarSenha.js '%}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
     <script src="https://kit.fontawesome.com/49ae6019cf.js" crossorigin="anonymous"></script>
 </body>
 

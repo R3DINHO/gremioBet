@@ -4,5 +4,6 @@ cor do corpo da página: #e8e8e8
 cor do hover da navbar: #e46e00
 cor da linha de separação: #929292
 cor filtro selecionado: #3d3d3d
+cor do hover odds: #ffd0a5
 
 
