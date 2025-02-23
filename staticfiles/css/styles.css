@@ -442,7 +442,7 @@ header .resultado{
     font-size: 50px;
 }
 
-#registro-form{
+#registro-form, #login-form{
     display: flex;
     flex-direction: column;
     padding: 2rem 0;
@@ -457,7 +457,7 @@ header .resultado{
     font-weight: bold;
 }
 
-.registro-container input{
+.registro-container input, #id_username, #id_password{
     width: 80%;
     margin: 0 auto;
     padding: 0.75rem 0.5rem;
@@ -490,6 +490,12 @@ input:focus{
     transform: translate(0, -50%);
     cursor: pointer;
     font-size: 25px;
+}
+
+.errorlist {
+    list-style: none;
+    color: #ff0000;
+    font-weight: bold;
 }
 
 

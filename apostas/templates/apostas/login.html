@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
-
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
@@ -24,7 +22,7 @@
             <nav>
                 <a href="{% url 'index' %}">
                     <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
-                </a>    
+                </a>
                 <div class="login-container">
                     <i class="fa-solid fa-user" id="user"></i>
                     <a class="userLogin-buttons" id="loginButton" href="{% url 'login' %}">Login</a>
@@ -35,20 +33,22 @@
             </div>
         </div>
         <main>
-            <!-- login.html -->
             <div class="registro-container">
-
-                {% block content %}
                 <h2>Login</h2>
-                <form method="post" id="registro-form">
+
+                <form method="post" id="login-form">
                     {% csrf_token %}
-                    <label for="username">Usuário</label>
-                    <input type="text" name="username" required>
-                    <label for="password">Senha</label>
-                    <input type="password" name="password" required>
+
+                    <label>Usuário</label> {{ form.username }}
+                    <label>Senha</label> {{ form.password }}
+
+                    {% if form.non_field_errors %}
+                    <div class="error-message">
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
                     <button type="submit" id="registrar-Button">Login</button>
                 </form>
-                {% endblock %}                   
             </div>
         </main>
     </div>
