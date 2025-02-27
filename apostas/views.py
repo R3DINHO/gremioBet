@@ -38,28 +38,6 @@ def user_login(request):
             pass
     return render(request, 'apostas/login.html')
 
-from django.contrib.auth.views import LoginView
-from .forms import CustomAuthenticationForm
-
-from django.contrib.auth.views import LoginView
-from .forms import CustomAuthenticationForm
-
-from django.shortcuts import render
-from django.contrib.auth.views import LoginView
-from .forms import CustomAuthenticationForm
-
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from .forms import CustomAuthenticationForm
-
-# views.py
-from django.shortcuts import render
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login
-
-# views.py
-from django.contrib import messages
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import CustomAuthenticationForm
@@ -83,7 +61,50 @@ def user_login(request):
     return render(request, 'apostas/login.html', {'form': form})
 
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from .forms import EditarPerfilForm
 
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+from .forms import EditarPerfilForm, AtualizarSenhaForm
+
+@login_required
+def editar_perfil(request):
+    perfil_form = EditarPerfilForm(instance=request.user)
+    senha_form = AtualizarSenhaForm(request.user)
+
+    if request.method == 'POST':
+        print("POST recebido!")  # Verificar se o POST está sendo capturado
+
+        if 'perfil_submit' in request.POST:
+            print("Formulário de perfil enviado!")
+            perfil_form = EditarPerfilForm(request.POST, instance=request.user)
+            if perfil_form.is_valid():
+                perfil_form.save()
+                messages.success(request, 'Perfil atualizado com sucesso!')
+                return redirect('editar_perfil')
+
+        elif 'senha_submit' in request.POST:
+            print("Formulário de senha enviado!")  # Verificar se o formulário correto está sendo enviado
+            senha_form = AtualizarSenhaForm(request.user, request.POST)
+            if senha_form.is_valid():
+                user = senha_form.save()
+                update_session_auth_hash(request, user)
+                messages.success(request, 'Senha atualizada com sucesso!')
+                return redirect('editar_perfil')
+            else:
+                print("Erros do formulário de senha:", senha_form.errors)  # Verificar quais erros estão aparecendo
+                messages.error(request, 'Erro ao atualizar a senha. Verifique os campos e tente novamente.')
+
+    return render(request, 'apostas/editarPerfil.html', {
+        'perfil_form': perfil_form,
+        'senha_form': senha_form,
+    })
 
 
 

@@ -43,6 +43,7 @@ body{
 #perfilImage{
     height: 3.5rem;
     width: auto;
+    cursor: pointer;
 }
 
 .userLogin-buttons{
@@ -492,12 +493,16 @@ input:focus{
     font-size: 25px;
 }
 
-.errorlist {
+.errorlist, .error-message {
     list-style: none;
     color: #ff0000;
     font-weight: bold;
 }
 
+.error-message{
+    margin: 0 auto;
+    text-align: start;
+}
 
 /* escolher imagem */
 
@@ -557,6 +562,33 @@ input:focus{
     background-color: #e46e00;
 }
 
+/* Editar perfil */
+
+.form-group{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.separaLinha{
+    position: relative;
+
+}
+
+.separaLinha hr{
+    border: 1px solid #929292;
+    margin: 2rem 0;
+}
+
+.separaLinha h3{
+    color: #3b3b3b;
+    position: absolute;
+    background-color: #afafaf;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 0 0.5rem;
+}
 
 
 @media screen and (max-width: 1440px) {

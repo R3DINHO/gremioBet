@@ -23,7 +23,7 @@ class CustomUserCreationForm(UserCreationForm):
     )
 
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'placeholder': 'seuemail@gmail.com'})
+        widget=forms.EmailInput(attrs={'placeholder': '{seuemail@gmail.com}'})
     )
     username = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Ex: NeyLindo'})
@@ -38,7 +38,6 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Personalizando mensagens de erro
         self.fields['username'].error_messages = {
             'unique': 'Este nome de usuário já está em uso.',
             'max_length': 'O nome de usuário deve ter no máximo 20 caracteres.',
@@ -94,3 +93,116 @@ class CustomAuthenticationForm(AuthenticationForm):
         'invalid_login': "Nome de usuário ou senha incorretos. Verifique e tente novamente.",
         'inactive': "Esta conta está inativa.",
     }
+
+from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from .models import CustomUser
+
+class CustomUserChangeForm(UserChangeForm):
+    password = None  # Oculta o campo de senha
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'profile_image']
+
+
+from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.hashers import check_password
+
+from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.hashers import check_password
+
+from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from .models import CustomUser
+
+from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from .models import CustomUser
+
+class EditarPerfilForm(UserChangeForm):
+    password = None  # Oculta o campo de senha
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Personalizando mensagens de erro para o campo 'username'
+        self.fields['username'].error_messages = {
+            'max_length': 'O nome de usuário deve ter no máximo 20 caracteres.',
+            'min_lenght': 'O nome de usuário deve ter no mínimo 4 caracteres.',
+            'unique': 'Este nome de usuário já está em uso.',
+        }
+    
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if username and (len(username) < 4 or len(username) > 20):
+            raise ValidationError("O nome de usuário deve ter entre 4 e 20 caracteres.")
+        return username
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get("username")
+        if username and len(username) < 4:
+            self.add_error("username", "O nome de usuário deve ter pelo menos 4 caracteres.")
+        return cleaned_data
+    
+
+
+from django import forms
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.exceptions import ValidationError
+import re
+
+from django import forms
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.exceptions import ValidationError
+import re
+
+from django import forms
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.exceptions import ValidationError
+import re
+
+class AtualizarSenhaForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Personalizando mensagens de erro
+        self.fields['old_password'].error_messages = {
+            'required': 'A senha atual é obrigatória.',
+            'password_incorrect': 'Senha incorreta. Tente novamente.',
+        }
+
+        self.fields['new_password1'].error_messages = {
+            'required': 'A nova senha é obrigatória.',
+            'min_length': 'A nova senha deve ter pelo menos 8 caracteres.',
+            'password_too_common': 'Essa senha é muito comum.',
+            'password_entirely_numeric': 'A senha não pode ser apenas números.',
+        }
+
+    def clean_new_password2(self):
+        senha1 = self.cleaned_data.get("new_password1")
+        senha2 = self.cleaned_data.get("new_password2")
+
+        if senha1 and senha2:
+            if senha1 != senha2:
+                raise ValidationError("As senhas não coincidem.")
+            
+            return senha2
+        
+    def clean_old_password(self):
+        old_password = self.cleaned_data.get("old_password")
+        
+        # Verifica se a senha antiga está correta
+        if not self.user.check_password(old_password):
+            raise ValidationError("Senha incorreta. Tente novamente.")
+        
+        return old_password
+       
+

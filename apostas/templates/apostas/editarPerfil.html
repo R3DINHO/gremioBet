@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>GremioBet</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar-container">
+            <nav>
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/logos/logoBranca.png' %}" alt="logo de GremioBet">
+                </a>
+                <div class="login-container">
+                    {% if user.is_authenticated %}
+                    <p id="gremioCoins"><span style="font-weight: bold;">₲</span>{{ user.gremio_coins }}</p>
+                    <div class="perfilImage-container">
+                        <img src="{{ user.get_imagem_perfil_url }}" onclick="menuUsuario()" id="perfilImage"
+                            alt="Imagem de Perfil">
+                        <div id="menuUsuarioAbsolute" class="invisivel">
+                            <div class="menuUsuario">
+                                <ul>
+                                    <div class="infoUser">
+                                        <li><a href="" class="alaranja">{{user.username}}</a></li>
+                                        <li><a href="" class="alaranja naoBold">{{user.email}}</a></li>
+                                    </div>
+                                    <li><a href="{% url 'editar_perfil' %}">Editar Perfil <i
+                                                class="fa-solid fa-pen-to-square"></i></a></li>
+                                    <li><a href="">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                </ul>
+                                <div class="triangulo">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="userLogin-buttons" href="{% url 'logout' %}?next={% url 'index' %}">Sair</a>
+                    {% endif %}
+                </div>
+
+            </nav>
+            <div class="rodapeNav">
+            </div>
+        </div>
+        <main>
+            <div class="registro-container">
+                <!-- Formulário de Edição de Perfil -->
+                <h2>Editar Perfil</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="perfil_submit" value="1"> <!-- Identificador do formulário de perfil -->
+
+                    <div class="separaLinha">
+                        <hr>
+                        <h3>Perfil</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ perfil_form.username.id_for_label }}">Usuário</label>
+                        {{ perfil_form.username }}
+                        {% if perfil_form.username.errors %}
+                        <div class="error-message">
+                            {% for error in perfil_form.username.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ perfil_form.email.id_for_label }}">Email</label>
+                        {{ perfil_form.email }}
+                        {% if perfil_form.email.errors %}
+                        <div class="error-message">
+                            {% for error in perfil_form.email.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" id="registrar-Button">Salvar Alterações</button>
+                </form>
+
+                <!-- Formulário de Atualização de Senha -->
+                <form method="post">
+
+                    {% csrf_token %}
+                    <input type="hidden" name="senha_submit" value="1"> <!-- Identificador do formulário de senha -->
+
+                    <div class="separaLinha">
+                        <hr>
+                        <h3>Atualizar Senha</h3>
+                    </div>
+
+                    <!-- Campo de Senha Atual -->
+                    <div class="form-group">
+                        <label for="{{ senha_form.old_password.id_for_label }}"><strong>Senha Atual</strong></label>
+                        {{ senha_form.old_password }}
+                        {% for error in senha_form.old_password.errors %}
+                        <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Campo de Nova Senha -->
+                    <div class="form-group">
+                        <label for="{{ senha_form.new_password1.id_for_label }}"><strong>Nova Senha</strong></label>
+                        {{ senha_form.new_password1 }}
+                        {% for error in senha_form.new_password1.errors %}
+                        <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Campo de Confirmar Nova Senha -->
+                    <div class="form-group">
+                        <label for="{{ senha_form.new_password2.id_for_label }}"><strong>Confirmar Nova
+                                Senha</strong></label>
+                        {{ senha_form.new_password2 }}
+                        {% for error in senha_form.new_password2.errors %}
+                        <div class="error-message">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+
+
+                    <button type="submit" id="registrar-Button">Salvar Nova Senha</button>
+                </form>
+            </div>
+
+
+        </main>
+    </div>
+    <script src="{% static 'js/filtro.js' %}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="../../static/js/abrirApostasContainer.js"></script>
+    <script src="https://kit.fontawesome.com/49ae6019cf.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
