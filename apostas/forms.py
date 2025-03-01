@@ -125,9 +125,16 @@ from .models import CustomUser
 class EditarPerfilForm(UserChangeForm):
     password = None  # Oculta o campo de senha
 
+    profile_image = forms.ChoiceField(
+        choices=get_profile_images(),  # Supondo que você já tenha essa função
+        label="Imagem de Perfil",
+        widget=ImageRadioSelect,  # Certifique-se de que esse widget está correto
+        required=False
+    )
+
     class Meta:
         model = CustomUser
-        fields = ['username', 'email']
+        fields = ['username', 'email', 'profile_image']
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -77,6 +77,7 @@ from .forms import EditarPerfilForm, AtualizarSenhaForm
 def editar_perfil(request):
     perfil_form = EditarPerfilForm(instance=request.user)
     senha_form = AtualizarSenhaForm(request.user)
+    
 
     if request.method == 'POST':
         print("POST recebido!")  # Verificar se o POST está sendo capturado
@@ -88,6 +89,7 @@ def editar_perfil(request):
                 perfil_form.save()
                 messages.success(request, 'Perfil atualizado com sucesso!')
                 return redirect('editar_perfil')
+            
 
         elif 'senha_submit' in request.POST:
             print("Formulário de senha enviado!")  # Verificar se o formulário correto está sendo enviado
@@ -100,6 +102,18 @@ def editar_perfil(request):
             else:
                 print("Erros do formulário de senha:", senha_form.errors)  # Verificar quais erros estão aparecendo
                 messages.error(request, 'Erro ao atualizar a senha. Verifique os campos e tente novamente.')
+
+
+            
+        if perfil_form.is_valid():
+            user = perfil_form.save(commit=False)
+            if 'profile_image' in perfil_form.cleaned_data and perfil_form.cleaned_data['profile_image']:
+                user.profile_image = perfil_form.cleaned_data['profile_image']
+            user.save()
+            messages.success(request, 'Perfil atualizado com sucesso!')
+            return redirect('editar_perfil')
+        else:
+            perfil_form = EditarPerfilForm(instance=request.user)
 
     return render(request, 'apostas/editarPerfil.html', {
         'perfil_form': perfil_form,

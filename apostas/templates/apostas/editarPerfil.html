@@ -60,12 +60,13 @@
                 <h2>Editar Perfil</h2>
                 <form method="post">
                     {% csrf_token %}
-                    <input type="hidden" name="perfil_submit" value="1"> <!-- Identificador do formulário de perfil -->
+                    <input type="hidden" name="perfil_submit" value="1">
 
                     <div class="separaLinha">
                         <hr>
                         <h3>Perfil</h3>
                     </div>
+
                     <div class="form-group">
                         <label for="{{ perfil_form.username.id_for_label }}">Usuário</label>
                         {{ perfil_form.username }}
@@ -89,21 +90,46 @@
                         </div>
                         {% endif %}
                     </div>
+
+                    <!-- Seção de Edição da Imagem de Perfil -->
+                    <div class="separaLinha">
+                        <hr>
+                        <h3>Imagem de Perfil</h3>
+                    </div>
+
+                    <div class="perfil-atual">
+                        <p><strong>Imagem Atual:</strong></p>
+                        <img src="{{ user.get_imagem_perfil_url }}" alt="Imagem de Perfil" width="100">
+                        <button onclick="divImagens(this)">Selecionar nova imagem</button>
+                    </div>
+                    <div id="divOpcoesImagens" class="invisivel">
+                        {% for value, label in perfil_form.profile_image.field.choices %}
+                        <label for="id_profile_image_{{ value }}" id="image-label">
+                            <input type="radio" name="profile_image" value="{{ value }}"
+                                id="id_profile_image_{{ value }}" class="hidden-radio">
+                                <div class="image-container">
+                                    <img src="{% static 'img/fotosPerfil/' %}{{ value }}" width="50" height="50" />
+                                </div>
+                        </label>
+                        {% endfor %}
+                    </div>
+                    {{ perfil_form.profile_image.errors }}
+
+
+
                     <button type="submit" id="registrar-Button">Salvar Alterações</button>
                 </form>
 
-                <!-- Formulário de Atualização de Senha -->
+            <!-- Formulário de Atualização de Senha -->
                 <form method="post">
-
                     {% csrf_token %}
-                    <input type="hidden" name="senha_submit" value="1"> <!-- Identificador do formulário de senha -->
+                    <input type="hidden" name="senha_submit" value="1">
 
                     <div class="separaLinha">
                         <hr>
                         <h3>Atualizar Senha</h3>
                     </div>
 
-                    <!-- Campo de Senha Atual -->
                     <div class="form-group">
                         <label for="{{ senha_form.old_password.id_for_label }}"><strong>Senha Atual</strong></label>
                         {{ senha_form.old_password }}
@@ -112,7 +138,6 @@
                         {% endfor %}
                     </div>
 
-                    <!-- Campo de Nova Senha -->
                     <div class="form-group">
                         <label for="{{ senha_form.new_password1.id_for_label }}"><strong>Nova Senha</strong></label>
                         {{ senha_form.new_password1 }}
@@ -121,7 +146,6 @@
                         {% endfor %}
                     </div>
 
-                    <!-- Campo de Confirmar Nova Senha -->
                     <div class="form-group">
                         <label for="{{ senha_form.new_password2.id_for_label }}"><strong>Confirmar Nova
                                 Senha</strong></label>
@@ -131,18 +155,17 @@
                         {% endfor %}
                     </div>
 
-
-
                     <button type="submit" id="registrar-Button">Salvar Nova Senha</button>
                 </form>
-            </div>
+    </div>
 
 
-        </main>
+    </main>
     </div>
     <script src="{% static 'js/filtro.js' %}"></script>
-    <script src="{% static 'js/main.js'%}"></script>
     <script src="../../static/js/abrirApostasContainer.js"></script>
+    <script src="{% static 'js/mostrarSenha.js '%}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
     <script src="https://kit.fontawesome.com/49ae6019cf.js" crossorigin="anonymous"></script>
 </body>
 
