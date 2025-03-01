@@ -46,3 +46,26 @@ function menuUsuario(){
     }
 
 }
+
+// aparecer opcoes de nova imagem
+
+function divImagens(button){
+    event.preventDefault();
+    let divImagens = document.getElementById("divOpcoesImagens");
+
+    if(!divImagens.classList.contains("visivel")){
+        divImagens.classList.remove("invisivel")
+        divImagens.classList.add("visivel")
+    }
+    else if(divImagens.classList.contains("visivel")){
+        divImagens.classList.remove("visivel")
+        divImagens.classList.add("invisivel")
+
+    }
+
+    if (divImagens.classList.contains("visivel")) {
+        button.textContent = "Esconder opções de imagens"; 
+    } else {
+        button.textContent = "Selecionar nova imagem"; 
+    }
+}
