@@ -36,7 +36,7 @@
                                             <li><a href="" class="alaranja">{{user.username}}</a></li>
                                             <li><a href="" class="alaranja naoBold">{{user.email}}</a></li>
                                         </div>
-                                        <li><a href="{% url 'editar_perfil' %}">Editar Perfil <i class="fa-solid fa-pen-to-square"></i></a></li>
+                                        <li><a href="{% url 'editar_perfil' %}#topo">Editar Perfil <i class="fa-solid fa-pen-to-square"></i></a></li>
                                         <li><a href="{% url 'logout' %}?next={% url 'index' %}">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
                                     </ul>
                                     <div class="triangulo">
@@ -278,5 +278,5 @@
     <script src="../../static/js/abrirApostasContainer.js"></script>
     <script src="https://kit.fontawesome.com/49ae6019cf.js" crossorigin="anonymous"></script>
 </body>
-
+    
 </html>

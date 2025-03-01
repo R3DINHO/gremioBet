@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="topo">
         <div class="navbar-container">
             <nav>
                 <a href="{% url 'index' %}">
@@ -91,14 +91,8 @@
                         {% endif %}
                     </div>
 
-                    <!-- Seção de Edição da Imagem de Perfil -->
-                    <div class="separaLinha">
-                        <hr>
-                        <h3>Imagem de Perfil</h3>
-                    </div>
-
                     <div class="perfil-atual">
-                        <p><strong>Imagem Atual:</strong></p>
+                        <label style="text-align: center;">Imagem Atual</label> 
                         <img src="{{ user.get_imagem_perfil_url }}" alt="Imagem de Perfil" width="100">
                         <button onclick="divImagens(this)">Selecionar nova imagem</button>
                     </div>
