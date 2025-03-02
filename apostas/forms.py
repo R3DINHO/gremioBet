@@ -23,7 +23,7 @@ class CustomUserCreationForm(UserCreationForm):
     )
 
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'placeholder': '{seuemail@gmail.com}'})
+        widget=forms.EmailInput(attrs={'placeholder': 'seuemail@gmail.com'})
     )
     username = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Ex: NeyLindo'})
