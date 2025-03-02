@@ -128,7 +128,6 @@ body{
 
 .perfilImage-container{
     position: relative;
-    cursor: pointer;
 }
 
 #menuUsuarioAbsolute{
@@ -534,6 +533,8 @@ input:focus{
     display: inline-flex;
     justify-content: space-around;
     transition: border 0.3s ease;  /* Transição suave na borda */
+    cursor: pointer;
+
 }
 
 .image-container img {
