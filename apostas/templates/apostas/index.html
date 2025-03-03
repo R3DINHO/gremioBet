@@ -18,6 +18,9 @@
 </head>
 
 <body>
+    <div id="overlay">
+
+    </div>
     <div class="container">
         <div class="navbar-container">
             <nav>
@@ -126,21 +129,17 @@
                                 </div>
                             </div>
                             <div class="odds">
-                                <button class="odds-cards">{{ partida.odds_casa }}</button>
-                                <button class="odds-cards">{{ partida.odds_empate }}</button>
-                                <button class="odds-cards">{{ partida.odds_fora }}</button>
+                                <button class="odds-cards oddsCasa {{ partida.time_casa }}" id="{{ partida.idPartida }}" onclick="apostaRapida(this)">{{ partida.odds_casa }}</button>
+                                <button class="odds-cards oddsEmpate" id="{{ partida.idPartida }}" onclick="apostaRapida(this) " onclick="apostaRapida(this)">{{ partida.odds_empate }}</button>
+                                <button class="odds-cards oddsFora {{ partida.time_fora }}" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"  onclick="apostaRapida(this)">{{ partida.odds_fora }}</button>
                             </div>
                             <div class="ambosMarcam">
-                                <button class="odds-cards"><span class="texto">Sim</span> {{ partida.odds_casa
-                                    }}</button>
-                                <button class="odds-cards"><span class="texto">Não</span> {{ partida.odds_empate
-                                    }}</button>
+                                <button class="odds-cards oddsAmbasMarcamSim" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"  ><span class="texto">Sim</span> {{ partida.ambasMarcamSim}}</button>
+                                <button class="odds-cards oddsAmbasMarcamNao" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"><span class="texto">Não</span> {{ partida.ambasMarcamNao}}</button>
                             </div>
                             <div class="maisMenos">
-                                <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.odds_casa
-                                    }}</button>
-                                <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.odds_empate
-                                    }}</button>
+                                <button class="odds-cards oddsMaisGols" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"><span class="texto">+3.5</span>{{ partida.maisGols}}</button>
+                                <button class="odds-cards oddsMenosGols" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"><span class="texto">-3.5</span> {{ partida.menosGols}}</button>
                             </div>
                         </div>
                         {% endfor %}
@@ -202,17 +201,17 @@
                                     </div>
                                 </div>
                                 <div class="odds">
-                                    <button class="odds-cards {{partida.id}}" id="timeCasa" onclick="apostaRapida(this)">{{ partida.odds_casa }}</button>
-                                    <button class="odds-cards" onclick="apostaRapida()">{{ partida.odds_empate }}</button>
-                                    <button class="odds-cards" onclick="apostaRapida()">{{ partida.odds_fora }}</button>
+                                    <button class="odds-cards oddsCasa {{ partida.time_casa }}" id="{{ partida.idPartida }}" onclick="apostaRapida(this)">{{ partida.odds_casa }}</button>
+                                    <button class="odds-cards oddsEmpate" id="{{ partida.idPartida }}" onclick="apostaRapida(this) " onclick="apostaRapida(this)">{{ partida.odds_empate }}</button>
+                                    <button class="odds-cards oddsFora {{ partida.time_fora }}" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"  onclick="apostaRapida(this)">{{ partida.odds_fora }}</button>
                                 </div>
                                 <div class="ambosMarcam">
-                                    <button class="odds-cards"><span class="texto">Sim</span> {{ partida.ambasMarcamSim}}</button>
-                                    <button class="odds-cards"><span class="texto">Não</span> {{ partida.ambasMarcamNao}}</button>
+                                    <button class="odds-cards oddsAmbasMarcamSim" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"  ><span class="texto">Sim</span> {{ partida.ambasMarcamSim}}</button>
+                                    <button class="odds-cards oddsAmbasMarcamNao" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"><span class="texto">Não</span> {{ partida.ambasMarcamNao}}</button>
                                 </div>
                                 <div class="maisMenos">
-                                    <button class="odds-cards"><span class="texto">+3.5</span>{{ partida.maisGols}}</button>
-                                    <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.menosGols}}</button>
+                                    <button class="odds-cards oddsMaisGols" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"><span class="texto">+3.5</span>{{ partida.maisGols}}</button>
+                                    <button class="odds-cards oddsMenosGols" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"><span class="texto">-3.5</span> {{ partida.menosGols}}</button>
                                 </div>
                             </div>
                             {% endif %}
@@ -248,17 +247,17 @@
                                     </div>
                                 </div>
                                 <div class="odds">
-                                    <button class="odds-cards">{{ partida.odds_casa }}</button>
-                                    <button class="odds-cards">{{ partida.odds_empate }}</button>
-                                    <button class="odds-cards">{{ partida.odds_fora }}</button>
+                                    <button class="odds-cards oddsCasa {{ partida.time_casa }}" id="{{ partida.idPartida }}" onclick="apostaRapida(this)">{{ partida.odds_casa }}</button>
+                                    <button class="odds-cards oddsEmpate" id="{{ partida.idPartida }}" onclick="apostaRapida(this) " onclick="apostaRapida(this)">{{ partida.odds_empate }}</button>
+                                    <button class="odds-cards oddsFora {{ partida.time_fora }}" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"  onclick="apostaRapida(this)">{{ partida.odds_fora }}</button>
                                 </div>
                                 <div class="ambosMarcam">
-                                    <button class="odds-cards"><span class="texto">Sim</span> {{ partida.odds_casa}}</button>
-                                    <button class="odds-cards"><span class="texto">Não</span> {{ partida.odds_empate}}</button>
+                                    <button class="odds-cards oddsAmbasMarcamSim" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"  ><span class="texto">Sim</span> {{ partida.ambasMarcamSim}}</button>
+                                    <button class="odds-cards oddsAmbasMarcamNao" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"><span class="texto">Não</span> {{ partida.ambasMarcamNao}}</button>
                                 </div>
                                 <div class="maisMenos">
-                                    <button class="odds-cards"><span class="texto">+3.5</span> {{ partida.odds_casa}}</button>
-                                    <button class="odds-cards"><span class="texto">-3.5</span> {{ partida.odds_empate}}</button>
+                                    <button class="odds-cards oddsMaisGols" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"><span class="texto">+3.5</span>{{ partida.maisGols}}</button>
+                                    <button class="odds-cards oddsMenosGols" id="{{ partida.idPartida }}" onclick="apostaRapida(this)"><span class="texto">-3.5</span> {{ partida.menosGols}}</button>
                                 </div>
                             </div>
                             {% endif %}
@@ -270,9 +269,42 @@
                     </div>
 
                 </div>
-
+            <div class="apostaRapida-container" id="apostaRapida-container">
+                <span id="fecharPopup" onclick="fecharApostaRapida()"><i class="fa-solid fa-xmark"></i></span>
+                <h2>Aposta Rápida</h2>
+                <h3>Você está apostando na partida:</h3>
+                {% load tz %}
+                <div class="dadosPartida" id="dadosPartida">
+                    
+                </div>
+                <form method="post" id="formAposta">
+                    <h3>Quanto você quer apostar <span id="opcaoAposta"></span>?</h3>
+                    <h3 id="exibirOdd" style="font-weight: bolder;"></h3>
+                    <input type="number" id="valorApostado" value="1">
+                    <h3>Retorno esperado: <span id="retornoEsperado">₲ 0</span></h3>
+                    <button type="submit" id="registrar-Button">Confirmar Aposta</button>
+                </form>
+                
+                
+            </div>
         </main>
     </div>
+
+    <div id="dadosPartidas" style="display: none;">
+        {% for partida in partidas %}
+            <div class="partida" data-id="{{ partida.idPartida }}"
+                 data-dia="{{ partida.data|localtime|date:'D' }}"
+                 data-data="{{ partida.data|localtime|date:'d/m' }}"
+                 data-hora="{{ partida.data|localtime|time }}"
+                 data-time-casa="{{ partida.time_casa }}"
+                 data-cor-casa="{{ partida.cor_casa }}"
+                 data-time-fora="{{ partida.time_fora }}"
+                 data-cor-fora="{{ partida.cor_fora }}">
+            </div>
+        {% endfor %}
+    </div>
+    
+
     <script src="{% static 'js/filtro.js' %}"></script>
     <script src="{% static 'js/main.js'%}"></script>
     <script src="{% static 'js/realizarApostas.js'%}"></script>
