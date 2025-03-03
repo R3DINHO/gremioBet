@@ -622,7 +622,7 @@ input:focus{
     transition: 0.3s ease;
 }
 
-/* tela aposta  */
+/* tela aposta rapida */
 
 #overlay {
     position: fixed;
@@ -638,13 +638,50 @@ input:focus{
     background-color: #afafaf;
     border: 1px solid #e46e00;
     border-radius: 5px;
+    padding: 1rem;
     width: 750px;
     height: 450px;
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     display: none;
+}
+
+.apostaRapida-container .dadosPartida{
+    border: 1px solid #e46e00;
+    background-color: #e8e8e8;
+    padding: 0 2rem;
+    max-height: 100px;
+}
+
+.apostaRapida-container .dadosPartida .times{
+    justify-content: center;
+    gap: 10px;
+}
+
+#formAposta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+#formAposta input{
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #929292;
+    font-size: 20px;
+}
+
+
+#formAposta input:focus{
+border: 1px solid #e46e00;
+outline: none;
 }
 
 #fecharPopup{
