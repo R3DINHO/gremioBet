@@ -202,9 +202,9 @@
                                     </div>
                                 </div>
                                 <div class="odds">
-                                    <button class="odds-cards">{{ partida.odds_casa }}</button>
-                                    <button class="odds-cards">{{ partida.odds_empate }}</button>
-                                    <button class="odds-cards">{{ partida.odds_fora }}</button>
+                                    <button class="odds-cards {{partida.id}}" id="timeCasa" onclick="apostaRapida(this)">{{ partida.odds_casa }}</button>
+                                    <button class="odds-cards" onclick="apostaRapida()">{{ partida.odds_empate }}</button>
+                                    <button class="odds-cards" onclick="apostaRapida()">{{ partida.odds_fora }}</button>
                                 </div>
                                 <div class="ambosMarcam">
                                     <button class="odds-cards"><span class="texto">Sim</span> {{ partida.ambasMarcamSim}}</button>
@@ -275,6 +275,7 @@
     </div>
     <script src="{% static 'js/filtro.js' %}"></script>
     <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/realizarApostas.js'%}"></script>
     <script src="../../static/js/abrirApostasContainer.js"></script>
     <script src="https://kit.fontawesome.com/49ae6019cf.js" crossorigin="anonymous"></script>
 </body>

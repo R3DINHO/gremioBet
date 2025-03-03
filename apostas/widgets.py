@@ -2,7 +2,6 @@ from django import forms
 
 class ImageRadioSelect(forms.RadioSelect):
     def render(self, name, value, attrs=None, renderer=None):
-        # Renderiza as opções como imagens em vez de texto
         output = []
         for option in self.choices:
             option_value, option_label = option

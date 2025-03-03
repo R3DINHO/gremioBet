@@ -7,19 +7,18 @@ from .widgets import ImageRadioSelect
 from django.core.exceptions import ValidationError
 import re
 
-# Função para listar as imagens disponíveis na pasta 'fotosPerfil'
 def get_profile_images():
     profile_img_path = os.path.join(settings.BASE_DIR, 'apostas', 'static', 'img', 'fotosPerfil')
-    if os.path.exists(profile_img_path):  # Verifica se o diretório existe
+    if os.path.exists(profile_img_path):  
         images = [f for f in os.listdir(profile_img_path) if f.endswith(('.png', '.jpg', '.jpeg', '.gif', 'webp'))]
         return [(img, img) for img in images]
-    return []  # Retorna uma lista vazia caso o diretório não exista
+    return [] 
 
 class CustomUserCreationForm(UserCreationForm):
     profile_image = forms.ChoiceField(
         choices=get_profile_images(),
         label="Imagem de Perfil",
-        widget=ImageRadioSelect  # Certifique-se de que este widget está correto
+        widget=ImageRadioSelect  
     )
 
     email = forms.EmailField(
@@ -99,7 +98,7 @@ from django.contrib.auth.forms import UserChangeForm
 from .models import CustomUser
 
 class CustomUserChangeForm(UserChangeForm):
-    password = None  # Oculta o campo de senha
+    password = None  
 
     class Meta:
         model = CustomUser
@@ -108,27 +107,15 @@ class CustomUserChangeForm(UserChangeForm):
 
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
-from django.contrib.auth.hashers import check_password
-
-from django import forms
-from django.contrib.auth.forms import UserChangeForm
-from django.contrib.auth.hashers import check_password
-
-from django import forms
-from django.contrib.auth.forms import UserChangeForm
-from .models import CustomUser
-
-from django import forms
-from django.contrib.auth.forms import UserChangeForm
 from .models import CustomUser
 
 class EditarPerfilForm(UserChangeForm):
-    password = None  # Oculta o campo de senha
+    password = None  
 
     profile_image = forms.ChoiceField(
-        choices=get_profile_images(),  # Supondo que você já tenha essa função
+        choices=get_profile_images(),  
         label="Imagem de Perfil",
-        widget=ImageRadioSelect,  # Certifique-se de que esse widget está correto
+        widget=ImageRadioSelect, 
         required=False
     )
 
@@ -139,7 +126,7 @@ class EditarPerfilForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
-        # Personalizando mensagens de erro para o campo 'username'
+        
         self.fields['username'].error_messages = {
             'max_length': 'O nome de usuário deve ter no máximo 20 caracteres.',
             'min_lenght': 'O nome de usuário deve ter no mínimo 4 caracteres.',
@@ -160,17 +147,6 @@ class EditarPerfilForm(UserChangeForm):
         return cleaned_data
     
 
-
-from django import forms
-from django.contrib.auth.forms import PasswordChangeForm
-from django.core.exceptions import ValidationError
-import re
-
-from django import forms
-from django.contrib.auth.forms import PasswordChangeForm
-from django.core.exceptions import ValidationError
-import re
-
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.exceptions import ValidationError
@@ -180,7 +156,7 @@ class AtualizarSenhaForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Personalizando mensagens de erro
+
         self.fields['old_password'].error_messages = {
             'required': 'A senha atual é obrigatória.',
             'password_incorrect': 'Senha incorreta. Tente novamente.',
@@ -206,7 +182,7 @@ class AtualizarSenhaForm(PasswordChangeForm):
     def clean_old_password(self):
         old_password = self.cleaned_data.get("old_password")
         
-        # Verifica se a senha antiga está correta
+
         if not self.user.check_password(old_password):
             raise ValidationError("Senha incorreta. Tente novamente.")
         

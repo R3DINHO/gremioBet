@@ -514,9 +514,7 @@ input:focus{
     display: none;
 }
 
-/* Esconde os inputs do tipo radio */
-/* Esconde o input radio */
-/* Estilo para o contêiner da imagem */
+
 
 #image-label{
     font-size: 25px;
@@ -526,13 +524,13 @@ input:focus{
 .image-container {
     width: 100px;
     height: 100px;
-    background-color: #929292;  /* Fundo preto */
-    border-radius: 5px;       /* Bordas arredondadas */
+    background-color: #929292;  
+    border-radius: 5px;       
     padding: 5px;
     box-sizing: border-box;
     display: inline-flex;
     justify-content: space-around;
-    transition: border 0.3s ease;  /* Transição suave na borda */
+    transition: border 0.3s ease;  
     cursor: pointer;
 
 }
@@ -545,7 +543,7 @@ input:focus{
 
 /* Borda padrão */
 .image-container {
-    border: 2px solid transparent; /* Borda invisível por padrão */
+    border: 2px solid transparent; 
     margin: 5px 0;
 }
 

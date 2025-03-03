@@ -1,6 +1,7 @@
 from django.db import models
 
 class Partida(models.Model):
+    idPartida = models.CharField()
     opcoes = [("fem", "feminino"), ("masc", "masculino")]
     modalidade = models.CharField(max_length=4, choices=opcoes)
     time_casa = models.CharField(max_length=100)
@@ -19,7 +20,6 @@ class Partida(models.Model):
     def __str__(self):
         return f'{self.time_casa} vs {self.time_fora} - {self.data}'
 
-# models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
